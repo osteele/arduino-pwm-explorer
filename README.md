@@ -3,6 +3,13 @@
 This is a pair of programs for the Arduino and Processing, to help students
 develop an understanding of Pulse Width Modulation (PWM).
 
+The Arduino sketch uses a software to control the onboard (and, optionally, an
+external) LED.
+
+The Processing sketch simulates an oscilloscope that displays the current PWM
+waveform, using serial data from the Arduino sketch.
+
+
 ## Instructions
 
 Wire an Arduino to a couple of pots, as described in `pwm_explorer.ino`. Upload

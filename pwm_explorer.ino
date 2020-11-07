@@ -1,10 +1,20 @@
 /*
   PWM Explorer
 
-  Connect pots to pins A0 and A1.
-  Optionally connect LED to PIN 13 and grond (in series with 220 resistor).
+  Software-controlled LED PWM.
+  Turn one pot to control the frequency.
+  Turn the other pot to control the duty cycle.
+  The frequency and duty cycle are sent to the serial connection, where they can
+  be plotted or by Serial Plotter or used to simulate an oscilloscope by the
+  Processing sketch in this directory.
+
+  Circuit:
+  - Connect pots to pins A0 and A1.
+  - Optionally connect LED to PIN 13 and ground (in series with 220Ω resistor).
 
   Author: Oliver Steele <steele@osteele.com>
+  Source: https://github.com/osteele/arduino-pwm-grapher
+  License: MIT
  */
 
 const int buttonPin = 2;
