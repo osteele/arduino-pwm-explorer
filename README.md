@@ -9,6 +9,7 @@ external) LED.
 The Processing sketch simulates an oscilloscope that displays the current PWM
 waveform, using serial data from the Arduino sketch.
 
+![breadboard](docs/breadboard.png)
 
 ## Instructions
 
@@ -24,8 +25,8 @@ frequency and duty cycle from a connected Arduino.
 ## Related
 
 [PWM Explorer](https://osteele.github.io/pwm-explorer/) is a similar
-visualization tool that runs entirely in simulation, without requiring a
-physical connection to an Arduino.
+visualization tool, that runs entirely in simulation in a browser window. (It
+does not require a physical connection to an Arduino.)
 
 ## License
 
