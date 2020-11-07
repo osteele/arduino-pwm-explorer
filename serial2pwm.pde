@@ -1,9 +1,9 @@
 /*
-  Simulate an oscilloscope that displays a PWM waveform, using serial data from
-  the Arduino sketch in this directory.
+  This sketch simulate an oscilloscope that displays a PWM waveform, using
+  serial data from the Arduino sketch in this directory.
 
   Author: Oliver Steele <steele@osteele.com>
-  Source: https://github.com/osteele/arduino-pwm-grapher
+  Source: https://github.com/osteele/arduino-pwm-explorer
   License: MIT
 */
 

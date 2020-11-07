@@ -13,7 +13,7 @@
   - Optionally connect LED to PIN 13 and ground (in series with 220Ω resistor).
 
   Author: Oliver Steele <steele@osteele.com>
-  Source: https://github.com/osteele/arduino-pwm-grapher
+  Source: https://github.com/osteele/arduino-pwm-explorer
   License: MIT
  */
 
