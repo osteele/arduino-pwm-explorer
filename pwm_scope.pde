@@ -13,16 +13,12 @@ Serial myPort;
 
 int period = -1;
 float dutyCycle;
-
 int lastMillis = 0;
 
 void setup() {
-  String[] ports = Serial.list();
-  for (int i = 0; i < ports.length; i++) {
-    println(ports[i]);
-  }
-  String portName = ports[0];
-  portName = "/dev/cu.usbmodem14301";
+  String portName = findSerialPort();
+  //portName = "/dev/cu.usbmodem14301";
+  println("Listening on port", portName);
   myPort = new Serial(this, portName, 9600);
 
   size(800, 350);
@@ -85,4 +81,29 @@ void serialReadPwmValues() {
     println(period, dutyCycle);
     lastMillis = millis();
   }
+}
+
+String findSerialPort() {
+  String[] ports = Serial.list();
+  StringList candidates = new StringList();
+  String usbModemPort = null;
+  for (int i = 0; i < ports.length; i++) {
+    String portName = ports[i];
+    if (match(portName, "^/dev/tty|^/dev/cu\\.Bluetooth|^/dev/cu\\..*-Wireless") != null) {
+      println(portName, " – ignored");
+    } else {
+      println(portName);
+      candidates.append(ports[i]);
+    }
+    if (match(portName, "^/dev/cu.usbmodem") != null) {
+      usbModemPort = portName;
+    }
+  }
+  if (usbModemPort != null) {
+    return usbModemPort;
+  }
+  if (candidates.size() > 0) {
+    return candidates.get(0);
+  }
+  return null;
 }
