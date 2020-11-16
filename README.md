@@ -1,6 +1,6 @@
 # PWM Visualizer
 
-This is a pair of programs for the Arduino and Processing, to help students
+This project œcontains a pair of programs for the Arduino and Processing, to help students
 develop an understanding of Pulse Width Modulation (PWM).
 
 The Arduino sketch uses a software to control the onboard (and, optionally, an
@@ -8,6 +8,8 @@ external) LED.
 
 The Processing sketch simulates an oscilloscope that displays the current PWM
 waveform, using serial data from the Arduino sketch.
+
+![screenshot](docs/screenshot.png)
 
 ## Instructions
 
@@ -23,7 +25,7 @@ Arduino.
 
 ![breadboard](docs/breadboard.png)
 
-![breadboard](docs/schematic.png)
+![schematic](docs/schematic.png)
 
 ## Related
 
