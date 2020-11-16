@@ -1,11 +1,11 @@
-/*
-  This sketch simulate an oscilloscope that displays a PWM waveform, using
-  serial data from the Arduino sketch in this directory.
-
-  Author: Oliver Steele <steele@osteele.com>
-  Source: https://github.com/osteele/arduino-pwm-explorer
-  License: MIT
-*/
+/**
+ * This sketch simulate an oscilloscope that displays a PWM waveform, using
+ * serial data from the Arduino sketch in this project.
+ *
+ * Author: Oliver Steele <steele@osteele.com>
+ * Source: https://github.com/osteele/arduino-pwm-explorer
+ * License: MIT
+ */
 
 import processing.serial.*;
 
@@ -17,7 +17,14 @@ int lastMillis = 0;
 
 void setup() {
   String portName = findSerialPort();
-  //portName = "/dev/cu.usbmodem14301";
+  if (portName == null) {
+    clear();
+    textSize(50);
+    fill(255, 128, 128);
+    text("Serial port not found", 10, height / 2);
+    noLoop();
+    return;
+  }
   println("Listening on port", portName);
   myPort = new Serial(this, portName, 9600);
 
@@ -25,9 +32,10 @@ void setup() {
 }
 
 void draw() {
+  if (myPort == null) return;
   serialReadPwmValues();
-  float xPeriod = period / 1000.0;
-  if (xPeriod <= 0.5) return;
+  float periodWidth = period / 1000.0;
+  if (periodWidth <= 0.5) return;
 
   background(255, 255, 255);
 
@@ -38,8 +46,8 @@ void draw() {
   beginShape();
   vertex(x, Y_LOW);
   while (x < width) {
-    float x1 = x + xPeriod * dutyCycle;
-    float x2 = x + xPeriod;
+    float x1 = x + periodWidth * dutyCycle;
+    float x2 = x + periodWidth;
     vertex(x, Y_HIGH);
     vertex(x1, Y_HIGH);
     vertex(x1, Y_LOW);
@@ -63,7 +71,7 @@ void draw() {
 }
 
 void serialReadPwmValues() {
-  if (myPort.available() <=0) return;
+  if (myPort.available() <= 0) return;
   String line = myPort.readStringUntil('\n');
   if (line == null) return;
 
@@ -92,11 +100,13 @@ String findSerialPort() {
     if (match(portName, "^/dev/tty|^/dev/cu\\.Bluetooth|^/dev/cu\\..*-Wireless") != null) {
       println(portName, " – ignored");
     } else {
-      println(portName);
+      if (match(portName, "^/dev/(cu\\.usbmodem|tty\\.usb(modem|serial))") != null) {
+        println(portName, " *");
+        usbModemPort = portName;
+      } else {
+        println(portName);
+      }
       candidates.append(ports[i]);
-    }
-    if (match(portName, "^/dev/cu.usbmodem") != null) {
-      usbModemPort = portName;
     }
   }
   if (usbModemPort != null) {
